@@ -8,9 +8,9 @@ import java.util.Objects;
 @AllArgsConstructor
 @Getter
 public enum Status {
-    VERMELHOR(1, "Negativo"),
-    VERDE(2, "Positivo"),
-    AMARELO(3, "Itermitente");
+    VERMELHA(1, "vermelha"),
+    VERDE(2, "verde"),
+    AMARELA(3, "amarela");
 
     private final int cod;
     private final String descricao;
@@ -26,6 +26,6 @@ public enum Status {
                 return status;
             }
         }
-        throw new IllegalArgumentException("Id inválido: " + cod);
+        throw new IllegalArgumentException("codigo inválido: " + cod);
     }
 }

@@ -1,34 +1,36 @@
 package com.example.demo.entity;
 
-import com.example.demo.entity.enums.Estado;
 import com.example.demo.entity.enums.Status;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Data
 @Entity
-public class Nota {
+@NoArgsConstructor
+@AllArgsConstructor
+public class StatusServicosNFE {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private LocalDateTime data;
-    private Estado estado;
+
+    private String autorizador;
+
     private Status status;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Nota Nota = (Nota) o;
-        return getId().equals(Nota.getId());
+        StatusServicosNFE statusServicosNFE = (StatusServicosNFE) o;
+        return getId().equals(statusServicosNFE.getId());
     }
 
     @Override
@@ -40,6 +42,6 @@ public class Nota {
     public String toString() {
         return String.format(
                 "Nota[id=%d, data='%s', estado='%s', status='%s']",
-                id, data, estado, status);
+                id, data, autorizador, status);
     }
 }
