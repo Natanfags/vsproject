@@ -22,7 +22,11 @@ public class StatusServicosService {
 
     private final CreateConectionService createConectionService;
 
-    public void createServicosFromUrl() {
+    public List<StatusServicosNFE> findStatusAtualServicos() {
+        return this.createServicosFromUrl();
+    }
+
+    public List<StatusServicosNFE> createServicosFromUrl() {
         Document doc = createConectionService.getDoc();
         List<StatusServicosNFE> statusServicosNFES = new ArrayList<>();
 
@@ -43,11 +47,29 @@ public class StatusServicosService {
             statusServicosNFES.add(statusServicosNFE);
             i++;
         }
-        statusServicosRepository.saveAll(statusServicosNFES);
+
+        return statusServicosNFES;
+    }
+
+    public void saveAll(List<StatusServicosNFE> statusServicosNFES) {
+        this.statusServicosRepository.saveAll(statusServicosNFES);
+    }
+
+    public List<StatusServicosNFE> findStatusServicoByEstados(String estado) {
+        return this.statusServicosRepository.findAllByAutorizadorEquals(estado);
+    }
+
+    public List<StatusServicosNFE> findStatusByData(LocalDateTime data) {
+        return statusServicosRepository.findAllByData(data);
+    }
+
+    public StatusServicosNFE getStatusComMarioIndisponibilidade() {
+        return statusServicosRepository.findStatusComIndisponibildadeMaior();
     }
 
     private void setStatus(StatusServicosNFE statusServicosNFE, Element elEstadosAndStatus) {
-        Element el = elEstadosAndStatus.getElementsByTag("td").get(5).child(0);
+        int indiceStatusServicoFromUrl = 5;
+        Element el = elEstadosAndStatus.getElementsByTag("td").get(indiceStatusServicoFromUrl).child(0);
         String src = el.attr("src");
 
         if (src.contains(Status.VERDE.getDescricao())) {

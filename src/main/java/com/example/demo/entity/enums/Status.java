@@ -8,24 +8,23 @@ import java.util.Objects;
 @AllArgsConstructor
 @Getter
 public enum Status {
-    VERMELHA(1, "vermelha"),
-    VERDE(2, "verde"),
-    AMARELA(3, "amarela");
+    VERMELHA("vermelha"),
+    VERDE( "verde"),
+    AMARELA( "amarela");
 
-    private final int cod;
     private final String descricao;
 
-    public static Status toEnum(Integer cod) {
+    public static Status toEnum(String descricao) {
 
-        if (Objects.isNull(cod)) {
+        if (Objects.isNull(descricao)) {
             return null;
         }
 
         for (Status status : Status.values()) {
-            if (cod.equals(status.getCod())) {
+            if (descricao.equals(status.getDescricao())) {
                 return status;
             }
         }
-        throw new IllegalArgumentException("codigo inválido: " + cod);
+        throw new IllegalArgumentException("descricao inválida: " + descricao);
     }
 }
