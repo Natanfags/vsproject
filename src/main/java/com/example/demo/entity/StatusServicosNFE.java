@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import com.example.demo.entity.enums.Status;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,8 @@ import java.util.Objects;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@Table(name = "STATUSSERVICO")
 public class StatusServicosNFE {
 
     @Id
@@ -23,6 +26,7 @@ public class StatusServicosNFE {
 
     private String autorizador;
 
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @Override

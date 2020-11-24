@@ -9,8 +9,8 @@ import java.util.Objects;
 @Getter
 public enum Status {
     VERMELHA("vermelha"),
-    VERDE( "verde"),
-    AMARELA( "amarela");
+    VERDE("verde"),
+    AMARELA("amarela");
 
     private final String descricao;
 

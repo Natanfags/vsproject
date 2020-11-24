@@ -1,6 +1,9 @@
 package com.example.demo.service;
 
+import com.example.demo.converter.StatusServicoNFEConverter;
 import com.example.demo.entity.StatusServicosNFE;
+import com.example.demo.entity.dto.DashboardStatusServicosDTO;
+import com.example.demo.entity.dto.StatusServicosDTO;
 import com.example.demo.entity.enums.Status;
 import com.example.demo.repository.StatusServicosRepository;
 import lombok.AllArgsConstructor;
@@ -19,11 +22,11 @@ import java.util.Objects;
 public class StatusServicosService {
 
     private final StatusServicosRepository statusServicosRepository;
-
     private final CreateConectionService createConectionService;
+    private final StatusServicoNFEConverter statusServicoNFEConverter;
 
-    public List<StatusServicosNFE> findStatusAtualServicos() {
-        return this.createServicosFromUrl();
+    public List<StatusServicosDTO> findStatusAtualServicos() {
+        return statusServicoNFEConverter.converteListaToDto(this.createServicosFromUrl());
     }
 
     public List<StatusServicosNFE> createServicosFromUrl() {
@@ -55,16 +58,20 @@ public class StatusServicosService {
         this.statusServicosRepository.saveAll(statusServicosNFES);
     }
 
-    public List<StatusServicosNFE> findStatusServicoByEstados(String estado) {
-        return this.statusServicosRepository.findAllByAutorizadorEquals(estado);
+    public List<StatusServicosDTO> findStatusServicoByEstados(String estado) {
+        return statusServicoNFEConverter.converteListaToDto(this.statusServicosRepository.findAllByAutorizadorEquals(estado));
     }
 
-    public List<StatusServicosNFE> findStatusByData(LocalDateTime data) {
-        return statusServicosRepository.findAllByData(data);
+    public List<StatusServicosDTO> findStatusByData(LocalDateTime data) {
+        return statusServicoNFEConverter.converteListaToDto(statusServicosRepository.findAllByData(data));
     }
 
-    public StatusServicosNFE getStatusComMarioIndisponibilidade() {
-        return statusServicosRepository.findStatusComIndisponibildadeMaior();
+    public List<String> findAllEstadosDisponiveis() {
+        return statusServicosRepository.findAllStadosDisponiveis();
+    }
+
+    public List<DashboardStatusServicosDTO> getDadosStatusServicoDashboard() {
+        return statusServicosRepository.getAllStatusServicos();
     }
 
     private void setStatus(StatusServicosNFE statusServicosNFE, Element elEstadosAndStatus) {
