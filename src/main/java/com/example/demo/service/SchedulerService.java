@@ -15,7 +15,7 @@ public class SchedulerService {
     @Setter
     private StatusServicosService statusServicosService;
 
-    @Scheduled(cron = "0 */1 * * * *")
+    @Scheduled(cron = "0 */5 * * * *")
     public void salvarStatusACadaCincoMinutos() {
         List<StatusServicosNFE> servicosFromUrl = this.statusServicosService.createServicosFromUrl();
         this.statusServicosService.saveAll(servicosFromUrl);
