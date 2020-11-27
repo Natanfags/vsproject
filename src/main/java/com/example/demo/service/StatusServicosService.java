@@ -2,7 +2,6 @@ package com.example.demo.service;
 
 import com.example.demo.converter.StatusServicoNFEConverter;
 import com.example.demo.entity.StatusServicosNFE;
-import com.example.demo.entity.dto.DashboardStatusServicosDTO;
 import com.example.demo.entity.dto.StatusServicosDTO;
 import com.example.demo.entity.enums.Status;
 import com.example.demo.repository.StatusServicosRepository;
@@ -68,10 +67,6 @@ public class StatusServicosService {
 
     public List<String> findAllEstadosDisponiveis() {
         return statusServicosRepository.findAllStadosDisponiveis();
-    }
-
-    public List<DashboardStatusServicosDTO> getDadosStatusServicoDashboard() {
-        return statusServicosRepository.getAllStatusServicos();
     }
 
     private void setStatus(StatusServicosNFE statusServicosNFE, Element elEstadosAndStatus) {

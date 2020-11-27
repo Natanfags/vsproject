@@ -68,18 +68,6 @@ public class ExtractDataResourceTest {
         verify(service, times(1)).findStatusByData(any());
     }
 
-    @Test
-    public void getSatusComMariorIndisponibilidade() throws Exception {
-
-        StatusServicosDTO statusServicosDTO = getStatusServicosDTO();
-
-//        when(service.getStatusComMarioIndisponibilidade()).thenReturn(statusServicosDTO);
-
-        mockMvc.perform(get(path("/get-status-indisponibilidade-maior")))
-                .andExpect(status().isOk());
-
-//        verify(service, times(1)).getStatusComMarioIndisponibilidade();
-    }
 
     private StatusServicosDTO getStatusServicosDTO() {
         StatusServicosDTO statusServicosDTO = new StatusServicosDTO();

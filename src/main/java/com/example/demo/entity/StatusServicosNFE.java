@@ -48,4 +48,8 @@ public class StatusServicosNFE {
                 "Nota[id=%d, data='%s', estado='%s', status='%s']",
                 id, data, autorizador, status);
     }
+
+    public StatusServicosNFE(String autorizador) {
+        this.autorizador = autorizador;
+    }
 }
